@@ -1,19 +1,17 @@
-const express = require('express');
+const express = require("express");
+const mongoose = require("mongoose");
 const app = express();
-const cors = require('cors');
+const url = "mongodb+srv://admin:admin@cluster0.xwghn2u.mongodb.net/";
 
-app.use(express.json());
-app.use(cors());
-//Cross-Origin Resource Sharing (CORS) is an HTTP-header based mechanism that allows a server to indicate any origins (domain, scheme, or port) other than its own from which a browser should permit loading resources
-const db = require('./models');
+mongoose.connect(url);
+mongoose.connection.once("open", ()=> {
+    console.log("connected");
+})
 
-//Routers - endpoints
+const userRouter = require("./routes/Auth");    
+app.use("/user",userRouter);
 
-const usersRouter = require('./routes/Users');
-app.use('/auth', usersRouter);
 
-db.sequelize.sync().then(() => {
-  app.listen(3001, () => {
-    console.log('Server running on port 3001');
-  });
+app.listen("3001",()=> {    //port
+    
 });

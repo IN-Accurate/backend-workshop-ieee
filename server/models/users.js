@@ -8,16 +8,6 @@ const userSchema = new mongoose.Schema(
       min: 3,
       max: 20,
     },
-    phone: {
-      type: String,
-      require: true,
-      max: 10,
-    },
-    address: {
-      type: String,
-      require: true,
-      max: 100,
-    },
     email: {
       type: String,
       require: true,
@@ -34,5 +24,5 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Users = mongoose.model('Users', userSchema);
+const Users = mongoose.model('users', userSchema);
 module.exports = Users;
